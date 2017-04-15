@@ -1,0 +1,1 @@
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Web\obj\Debug\ProductLaunch.Web.csprojResolveAssemblyReference.cache

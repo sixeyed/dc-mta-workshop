@@ -1,0 +1,5 @@
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\bin\Debug\ProductLaunch.Entities.dll
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\bin\Debug\ProductLaunch.Entities.pdb
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.csprojResolveAssemblyReference.cache
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.dll
+C:\src\incubating\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.pdb
