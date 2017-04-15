@@ -44,12 +44,14 @@ namespace ProductLaunch.Web
         private void PopulateRoles()
         {
             ddlRole.Items.Clear();
+            ddlRole.Items.Add("");
             ddlRole.Items.AddRange(_Roles.Select(x => new ListItem(x.Value.RoleName, x.Key)).ToArray()); 
         }
 
         private void PopulateCountries()
         {
             ddlCountry.Items.Clear();
+            ddlCountry.Items.Add("");
             ddlCountry.Items.AddRange(_Countries.Select(x => new ListItem(x.Value.CountryName, x.Key)).ToArray());
         }
 
