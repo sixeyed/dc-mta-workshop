@@ -8,3 +8,8 @@ E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\b
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.csprojResolveAssemblyReference.cache
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.dll
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.pdb
+c:\out\web\ProductLaunchWeb\ProductLaunch.Entities.dll
+c:\out\web\ProductLaunchWeb\ProductLaunch.Entities.pdb
+C:\src\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.csprojResolveAssemblyReference.cache
+C:\src\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.dll
+C:\src\ProductLaunch.Entities\obj\Debug\ProductLaunch.Entities.pdb

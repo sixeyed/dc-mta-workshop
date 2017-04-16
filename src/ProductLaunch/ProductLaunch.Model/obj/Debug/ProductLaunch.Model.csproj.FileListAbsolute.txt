@@ -9,3 +9,9 @@ E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Model\bin\
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.csprojResolveAssemblyReference.cache
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.dll
 E:\scm\github\sixeyed\dc-mta-workshop\src\ProductLaunch\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.pdb
+c:\out\web\ProductLaunchWeb\ProductLaunch.Model.dll.config
+c:\out\web\ProductLaunchWeb\ProductLaunch.Model.dll
+c:\out\web\ProductLaunchWeb\ProductLaunch.Model.pdb
+C:\src\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.csprojResolveAssemblyReference.cache
+C:\src\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.dll
+C:\src\ProductLaunch.Model\obj\Debug\ProductLaunch.Model.pdb
