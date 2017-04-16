@@ -1,6 +1,6 @@
 
 $dbIP ='172.31.118.85'
-$connectionString="Server=$dbIP;Database=ProductLaunch;User Id=sa;Password= "
+$connectionString="Server=$dbIP;Database=ProductLaunch;User Id=sa;Password=DockerCon!!!"
 $env:DB_CONNECTION_STRING=$connectionString
 [System.Environment]::SetEnvironmentVariable('DB_CONNECTION_STRING', $connectionString)
 

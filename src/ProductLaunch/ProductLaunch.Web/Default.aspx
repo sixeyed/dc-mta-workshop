@@ -6,6 +6,7 @@
         <h1>Have you tried Image2Docker?</h1>
         <p class="lead">Image2Docker - tools for extracting apps from VMs into Dockerfiles.</p>
         <div style="text-align: right">
+            <!-- v2 -->
             <a href="http://2017.dockercon.com/register-dockercon-2017/" target="_blank">
                 <img src="img/dockercon-2017.png"/>
             </a>

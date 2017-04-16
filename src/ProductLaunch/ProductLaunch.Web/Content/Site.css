@@ -1,4 +1,5 @@
-﻿@font-face {
+﻿/* v2 */
+@font-face {
     font-family: 'Geomanist Book';
     src: url(../fonts/geomanist/hinted-Geomanist-Book.eot);
     src: url(../fonts/geomanist/hinted-Geomanist-Book.eot?#iefix) format('embedded-opentype'),url(../fonts/geomanist/hinted-Geomanist-Book.woff2) format('woff2'),url(../fonts/geomanist/hinted-Geomanist-Book.woff) format('woff'),url(../fonts/geomanist/hinted-Geomanist-Book.ttf) format('truetype'),url(../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Book) format('svg');
@@ -6,11 +7,11 @@
     font-style: normal
 }
 
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    /* v2 */
     background-color: #37A1D5;
     color: #FFF;
     font-size: 18px;
@@ -42,6 +43,8 @@ textarea {
     }
 }
 
+/* v2 */
+
 .jumbotron {
     font-family: 'Geomanist Book';
     background-color: #0087C9;
@@ -50,3 +53,4 @@ textarea {
 h1, h2 {
     font-family: 'Geomanist Book';
 }
+

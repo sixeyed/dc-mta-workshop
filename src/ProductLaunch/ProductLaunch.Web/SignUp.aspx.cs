@@ -21,11 +21,14 @@ namespace ProductLaunch.Web
             _Roles = new Dictionary<string, Role>();
             using (var context = new ProductLaunchContext())
             {
-                foreach (var country in context.Countries.OrderBy(x => x.CountryName))
+                _Countries["-"] = context.Countries.Single(x => x.CountryCode == "-");
+;                foreach (var country in context.Countries.Where(x=>x.CountryCode != "-").OrderBy(x => x.CountryName))
                 {
                     _Countries[country.CountryCode] = country;
                 }
-                foreach (var role in context.Roles.OrderBy(x => x.RoleName))
+
+                _Roles["-"] = context.Roles.Single(x => x.RoleCode == "-");
+                foreach (var role in context.Roles.Where(x => x.RoleCode != "-").OrderBy(x => x.RoleName))
                 {
                     _Roles[role.RoleCode] = role;
                 }
@@ -44,14 +47,12 @@ namespace ProductLaunch.Web
         private void PopulateRoles()
         {
             ddlRole.Items.Clear();
-            ddlRole.Items.Add("");
             ddlRole.Items.AddRange(_Roles.Select(x => new ListItem(x.Value.RoleName, x.Key)).ToArray()); 
         }
 
         private void PopulateCountries()
         {
             ddlCountry.Items.Clear();
-            ddlCountry.Items.Add("");
             ddlCountry.Items.AddRange(_Countries.Select(x => new ListItem(x.Value.CountryName, x.Key)).ToArray());
         }
 
@@ -70,6 +71,19 @@ namespace ProductLaunch.Web
                 Role = role
             };
 
+            //v1:
+            using (var context = new ProductLaunchContext())
+            {
+                //reload child objects:
+                prospect.Country = context.Countries.Single(x => x.CountryCode == prospect.Country.CountryCode);
+                prospect.Role = context.Roles.Single(x => x.RoleCode == prospect.Role.RoleCode);
+
+                context.Prospects.Add(prospect);
+                context.SaveChanges();
+            }
+
+            //v4:
+            /*
             var eventMessage = new ProspectSignedUpEvent
             {
                 Prospect = prospect,
@@ -77,6 +91,7 @@ namespace ProductLaunch.Web
             };
 
             MessageQueue.Publish(eventMessage);
+            */
 
             Server.Transfer("ThankYou.aspx");
         }
