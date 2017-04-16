@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  
+  mta-db:
+    image: microsoft/mssql-server-windows-express
+    environment: 
+      - ACCEPT_EULA=Y
+      - sa_password=DockerCon!!!
+    networks:
+      - app-net
+
+  mta-app:
+    image: sixeyed/mta-app:1.1
+    ports:
+      - "80:80"
+    environment:
+      - DB_CONNECTION_STRING=Server=mta-db;Database=ProductLaunch;User Id=sa;Password=DockerCon!!!;
+    depends_on:
+      - mta-db
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    external:
+      name: nat

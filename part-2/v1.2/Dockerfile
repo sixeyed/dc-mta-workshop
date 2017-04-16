@@ -1,4 +1,11 @@
 # escape=`
+
+# build agent
+FROM sixeyed/msbuild:4.5.2-webdeploy
+COPY src\ProductLaunch C:\src
+RUN C:\src\build.ps1
+
+# app image
 FROM microsoft/aspnet:windowsservercore-10.0.14393.693
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -15,7 +22,7 @@ HEALTHCHECK CMD powershell -command `
      else {return 1}; `
     } catch { return 1 }
 
-ENTRYPOINT ["powershell", "./bootstrap.ps1"]
+ENTRYPOINT ["powershell", "C:\\bootstrap.ps1"]
 
-COPY bootstrap.ps1 /
-COPY ProductLaunch.Web /web-app
+COPY .\part-2\v1.2\bootstrap.ps1 C:\
+COPY --from=0 C:\out\web\ProductLaunchWeb\_PublishedWebsites\ProductLaunch.Web C:\web-app
