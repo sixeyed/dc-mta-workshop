@@ -24,6 +24,7 @@ HEALTHCHECK CMD powershell -command `
 ENTRYPOINT ["powershell", "C:\\bootstrap.ps1"]
 
 ENV DB_CONNECTION_STRING="sqlserver"
+ENV MESSAGE_QUEUE_URL="nats://message-queue:4222"
 
 COPY .\src\docker\bootstrap.ps1 C:\
 COPY --from=0 C:\out\web\ProductLaunchWeb\_PublishedWebsites\ProductLaunch.Web C:\web-app

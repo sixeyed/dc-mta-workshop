@@ -71,7 +71,7 @@ namespace ProductLaunch.Web
                 Role = role
             };
 
-            //v1:
+            //v1.0:
             using (var context = new ProductLaunchContext())
             {
                 //reload child objects:
@@ -82,7 +82,7 @@ namespace ProductLaunch.Web
                 context.SaveChanges();
             }
 
-            //v4:
+            //v1.3:
             /*
             var eventMessage = new ProspectSignedUpEvent
             {

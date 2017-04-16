@@ -20,17 +20,9 @@ You will build images and push them to Docker Hub during the workshop, so they a
 
 ## <a name="2"></a>Step 2. Get Docker
 
-To start you will need a laptop or a VM running Windows 10 or Windows Server 2016, with the latest Windows updates applied. If you do not have a Windows machine available, we can provide you a VM running in Azure. 
+We are using new features in Docker 17.05. For the workshp we will provide you with a VM running in Azure which is already configured with everything you need. 
 
-### Windows 10
-
-Install [Docker CE for Windows]() from Docker Store. You can use the stable or the edge release for this workshop. Run Docker for Windows and from the taskbar switch to Windows containers:
-
-![img]()
-
-### Windows Server 2016
-
-Install [Docker EE for Windows Server]() from Docker Store. The installation deploys Docker as a Windows service and starts the service for you.
+If you want to use your own laptop or a VM running Windows 10 or Windows Server 2016, you'll need to install Docker 17.05, and follow the rest of the steps in this page to get your environment set up.
 
 ### Azure VM
 
@@ -45,6 +37,18 @@ You do not need Docker running on your laptop for this option, but you will need
 - Linux - install [Remmina](http://www.remmina.org/wp/), or any RDP client you prefer.
 
 Once you've connected to your Azure VM, skip to [Step 5](#5).
+
+### OR - Windows 10
+
+Install [Docker CE for Windows]() from Docker Store, making sure to choose the Edge build to get the latest version. Run Docker for Windows and from the taskbar switch to Windows containers:
+
+![img]()
+
+### OR - Windows Server 2016
+
+Install [Docker EE for Windows Server]() from Docker Store. The installation deploys Docker as a Windows service and starts the service for you. Then you need to replace the EE version with 17.05 CE:
+
+>TODO
 
 
 ## <a name="3"></a>Step 3. Pull the Windows base images
@@ -86,7 +90,14 @@ choco install vscode
 
 ## <a name="5"></a>Step 5. Get the source
 
-Source code for the workshop is on a public GitHub repo. You can clone it wherever you like, but the instructions assume a known directory structure. You can setup your environment to match with:
+Source code for the workshop is on a public GitHub repo. The lab VM has the repo set up, so just pull to make sure the latest changes are downloaded:
+
+```
+cd C:\scm\github\sixeyed\dc-mta-workshop
+git pull
+```
+
+If you're using your own machine, you can clone the repo wherever you like, but the instructions assume a known directory structure. You can setup your environment to match with:
 
 ```
 mkdir -p C:\scm\github\sixeyed

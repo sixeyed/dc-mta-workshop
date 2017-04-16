@@ -43,6 +43,7 @@ For the new app version there's a new MSI. The [Dockerfile](part-2/v1.1/Dockerfi
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.1
+
 docker image build --tag $DockerID/mta-app:1.1 .
 ```
 xx
