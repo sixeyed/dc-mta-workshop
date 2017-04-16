@@ -21,6 +21,39 @@ cd E:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.0
 docker image build --tag $DockerID/mta-app:1.0 .
 ```
 
+The app uses SQL Server, so start by running a SQL container:
+
+```
+docker container run --detach `
+ --name mta-db `
+ --env ACCEPT_EULA=Y `
+ --env-file db-credentials.env `
+ microsoft/mssql-server-windows-express
+```
+
+Then run the app:
+
+```
+docker container run --detach `
+ --env-file db-credentials.env `
+ --publish 80:80 `
+ $DockerID/mta-app:1.0
+```
+
+And register your details - that will write a row to SQL Server. The SQL Server container is only available to other Docker containers because no ports are published. You can execute PowerShell in the container to see your data:
+
+```
+docker exec v10_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
+```
+
+Version 1.0 has a pretty basic UI. Next you'll upgrade to a fancier version.
+
+## <a name="2"></a>Step 2. Update the ASP.NET site with a new image version
+
+For the new app version there's a new MSI. The [Dockerfile](part-2/v1.1/Dockerfile) is exatly the same as v1.0, just using a different MSI. This scenario is where you have a new applicatin 
+
+
+
 Rather than run a container from the image, we'll switch to swarm mode and run some services. First clean up:
 
 ```
