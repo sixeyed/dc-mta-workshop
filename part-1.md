@@ -72,7 +72,7 @@ Now run `exit` to leave the PowerShell session, which stops the container proces
 
 Interactive containers are useful when you are putting together your own image. You can run a container and verify all the steps you need to deploy your app, and capture them in a Dockerfile. 
 
-> You *can* [commit](https://docs.docker.com/engine/reference/commandline/commit/) a running container to make an image - but you must promise to never, ever do that. It's much better to have a repeatable [Dockerfile](https://docs.docker.com/engine/reference/builder/). You'll do that in a later task.
+> You *can* [commit](https://docs.docker.com/engine/reference/commandline/commit/) a running container to make an image from it - but you must promise to never, ever do that. It's much better to have a repeatable [Dockerfile](https://docs.docker.com/engine/reference/builder/). You'll see that shortly.
 
 ## <a name="task1.3"></a>Run a background SQL Server container
 
@@ -110,7 +110,7 @@ docker container exec sql `
 Now clean up, by removing any running containers:
 
 ```
-docker container rm --force $(docker container ls --quiet)
+docker container rm --force $(docker container ls --quiet --all)
 ```
 
 ## <a name="task2"></a>Step 2: Package and run a custom app using Docker
@@ -148,9 +148,9 @@ Now if you list the images and filter on the `mta` name, you'll see your new ima
 
 ```
 > docker image ls -f reference=*/mta*
-
-REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
-sixeyed/dockercon-tweet-app   latest              a14860778046        11 minutes ago      10.4 GB
+REPOSITORY              TAG                 IMAGE ID            CREATED              SIZE
+sixeyed/mta-tweet-app   latest              d5cb82036a67        About a minute ago   10.4 GB
+sixeyed/mta-verify      latest              ff071bdc2128        17 minutes ago       9.56 GB
 ```
 
 Docker has built the image but it's only stored on the local machine. Next we'll push it to a public repository.
@@ -164,7 +164,7 @@ Distribution is built into the Docker platform. You can build images locally and
 ```
 > docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: <DockerID>
+Username: $DockerID
 Password:
 Login Succeeded
 ```
@@ -175,7 +175,7 @@ Now upload your image to the Hub:
 docker push $DockerID/mta-tweet-app
 ```
 
-You'll see the upload progress for each layer in the Docker image. The IIS layer is almost 300MB so that will take a few seconds. The whole image is over 10GB, but the bulk of that is in the Windows Server Core base image. Those layers are already stored in Docker Hub, so they don't get uploaded - only the new parts of the image get pushed.
+You'll see the upload progress for each layer in the Docker image. The IIS layer is 260MB so that will take a few seconds. The whole image is over 10GB, but the bulk of that is in the Windows Server Core base image. Those layers are already stored in Docker Hub, so they don't get uploaded - only the new parts of the image get pushed.
 
 You can browse to *https://hub.docker.com/r/$DockerID/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
 
@@ -197,7 +197,7 @@ docker container inspect app --format '{{ .NetworkSettings.Networks.nat.IPAddres
 
 You should see this:
 
-![The DockerCon Tweet app in a Windows Server Core container](images/tweet-app.png)
+![The DockerCon Tweet app in a Windows Server Core container](part-1/images/tweet-app.png)
 
 Go ahead and hit the button to Tweet about the workshop! No data gets stored in the container, so your credentials are safe. 
 

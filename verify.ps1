@@ -7,6 +7,6 @@ Param(
 
 docker build `
  -t $dockerID/mta-verify `
- $pwd\verify
+ $pwd\verify;
 
-docker run --rm $dockerID/mta-verify
+docker run --rm $dockerID/mta-verify;

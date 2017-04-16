@@ -49,7 +49,7 @@ Once you've connected to your Azure VM, skip to [Step 5](#5).
 
 ## <a name="3"></a>Step 3. Pull the Windows base images
 
-We will use Docker images based on Windows Server Core and Nano Server, so be sure you have these  image versions available.
+We will use Docker images based on Windows Server Core and Nano Server, so be sure you have these image versions available.
 
 ```
 docker pull microsoft/nanoserver:10.0.14393.693
@@ -61,6 +61,12 @@ And tag them as `latest` in case you have any older versions of the image:
 ```
 docker tag microsoft/nanoserver:10.0.14393.693 microsoft/nanoserver:latest
 docker tag microsoft/windowsservercore:10.0.14393.693 microsoft/windowsservercore:latest
+```
+
+Now pull the SQL Server Express image, which is a pretty big one:
+
+```
+docker pull microsoft/mssql-server-windows-express
 ```
 
 ## <a name="4"></a>Step 4. Tool up!
@@ -92,8 +98,8 @@ git clone https://github.com/sixeyed/dc-mta-workshop
 Open a PowerShell prompt **using Run as Administrator** and run the verification script:
 
 ```
-C:\scm\github\sixeyed\dc-mta-workshop
-.\verify.ps1
+cd C:\scm\github\sixeyed\dc-mta-workshop
+.\verify.ps1 $DockerID
 ```
 
 You should see a useful message, proving your Docker setup is working correctly.
