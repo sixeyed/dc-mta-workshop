@@ -4,7 +4,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 # disable DNS cache so container addresses always fetched from Docker
 RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord
-ENV DB_CONNECTION_STRING
+ENV DB_CONNECTION_STRING="sqlserver"
 
 ENTRYPOINT ["powershell", "./bootstrap.ps1"]
 COPY bootstrap.ps1 /
