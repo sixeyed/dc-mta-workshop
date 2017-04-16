@@ -15,4 +15,7 @@ HEALTHCHECK CMD powershell -command `
      else {return 1}; `
     } catch { return 1 }
 
+ENTRYPOINT ["powershell", "./bootstrap.ps1"]
+
+COPY bootstrap.ps1 /
 COPY ProductLaunch.Web /web-app
