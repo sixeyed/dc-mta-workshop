@@ -63,10 +63,11 @@ docker tag microsoft/nanoserver:10.0.14393.693 microsoft/nanoserver:latest
 docker tag microsoft/windowsservercore:10.0.14393.693 microsoft/windowsservercore:latest
 ```
 
-Now pull the SQL Server Express image, which is a pretty big one:
+Now pull a couple of other big images, which will save time later:
 
 ```
 docker pull microsoft/mssql-server-windows-express
+docker pull sixeyed/msbuild:4.5.2-webdeploy
 ```
 
 ## <a name="4"></a>Step 4. Tool up!

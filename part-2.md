@@ -1,27 +1,68 @@
 # Part 2 - Modernizing .NET Apps, for Ops
 
-You'll already have a process for deploying ASP.NET apps, but it probably involves a lot of manual steps. Work like copying application content between servers, running interactive setup programs, modifying configuration items and manual smoke tests all add time and risk to deployments. 
-
-In Docker, the process of packaging applications is completely automated, and the platform supports automatic update and rollback for application deployments. You can build Docker images from your existing application artifacts, and run ASP.NET apps in containers without going back to source code.
-
-This lab is aimed at ops and system admins. It steps through packaging an ASP.NET WebForms app to run in a Docker container on Windows 10 or Windows Server 2016. It starts with an MSI and ends by showing you how to run and update the application as a highly-available service on Docker swam.
-
-# Part 1 - Docker on Windows
-
-We'll start with the basics and get a feel for running Docker on Windows.
-
-If you've previously used Docker, it's still worth following along. This workshop uses the new expanded Docker CLI syntax (like `docker container ls` rather than `docker ps`), so it will introduce you to the new commands.
+In this section we have an existing app, already packaged as an MSI. We'll Dockerize a few versions of the app, seeing how to do service updates and the benefits of Dockerfiles over MSIs.
 
 ## Steps
 
-* [1. Run some simple Windows Docker containers](#1)
- * [1.1. Run a task in a Nano Server container](#1.1)
- * [1.2. Run an interactive Windows Server Core container](#1.2)
- * [1.3. Run a background IIS web server container](#1.3)
-* [2. Package and run a custom app using Docker](#2)
- * [2.1: Build a custom website image](#2.1)
- * [2.2: Push your image to Docker Hub](#2.2)
- * [2.3: Run your website in a container](#2.3)
+* [1. Package an ASP.NET MSI as a Docker image](#1)
+* [2. Update the ASP.NET site with a new image version](#2)
+* [3. Use Docker to build the source and package without an MSI](#3)
+
+## <a name="1"></a>Step 1. Package an ASP.NET MSI as a Docker image
+
+It's easy to package an MSI into a Docker image - use `COPY` to copy the MSI into the image, and `RUN` to install the application using `msiexec`, which is already bundled in the Windows base image.
+
+Version 1.0 of our demo app is ready to go - check out the [Dockerfile](part-2/v1.0/Dockerfile). 
+
+Packaging the app with Docker is the same `build` command - you'll use an image tag to identify the version:
+
+```
+cd E:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.0
+docker image build --tag $DockerID/mta-app:1.0 .
+```
+
+Rather than run a container from the image, we'll switch to swarm mode and run some services. First clean up:
+
+```
+docker container rm --force $(docker container ls --quiet)
+```
+
+## <a name="1.1"></a>Deploy the v1.0 service in swarm mode
+
+In [swarm mode]() you can join several machines into a single Docker cluster. You run services from images, and let Docker decide which nodes to create containers on. Services support automated updates, so we'll demonstrate that with a single-node swarm.
+
+First you'll need you IP address from `ipconfig`. The one beginning `10.` is the one to use. Create the swarm, specifying the IP to use:
+
+```
+docker swarm init --listen-addr $ipAddress --advertise-addr $ipAddress
+```
+
+The app uses SQL Server, but it uses Entity Framework to create the schema so it doesn't need a custom SQL image. Create a network for the application, and then start SQL Server Express in a service:
+
+```
+docker network create -d overlay mta-app
+
+cd E:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.0
+
+docker service create --network mta-app `
+ --endpoint-mode dnsrr `
+ --env ACCEPT_EULA=Y `
+ --env-file db-credentials.env `
+ --name mta-db microsoft/mssql-server-windows-express
+```
+
+Now run the v1.0 app as a service:
+
+```
+docker service create --network mta-app `
+ --endpoint-mode dnsrr `
+ --publish mode=host,target=80,published=80 `
+ --env-file db-credentials.env `
+ --name mta-app $DockerId/mta-app:1.0
+```
+
+
+**** IN PROGRES ^^^ to here
 
 ## What You Will Learn
 

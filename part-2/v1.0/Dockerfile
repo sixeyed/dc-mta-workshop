@@ -4,9 +4,10 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 # disable DNS cache so container addresses always fetched from Docker
 RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord
+ENV DB_CONNECTION_STRING
 
-ENV DB_CONNECTION_STRING="Server=sql;Database=ProductLaunch;User Id=sa;Password=DockerCon!!!"
+ENTRYPOINT ["powershell", "./bootstrap.ps1"]
+COPY bootstrap.ps1 /
 
 COPY ProductLaunch-1.0.msi /
-
 RUN Start-Process msiexec.exe -ArgumentList '/i', 'C:\ProductLaunch-1.0.msi', '/quiet', '/norestart' -NoNewWindow -Wait
