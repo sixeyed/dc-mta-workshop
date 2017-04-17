@@ -103,7 +103,7 @@ docker build -t $Env:dockerId/mta-app:1.2 -f part-2\v1.2\Dockerfile .
 As before, upgrade the running application using Docker Compose:
 
 ```
-cd C:\scm\github\sixeyed\dc-mta-workshop\part-2
+cd C:\scm\github\sixeyed\dc-mta-workshop\app
 
 docker-compose -f docker-compose-1.2.yml up -d
 ```
@@ -120,7 +120,7 @@ start "http://$ip/ProductLaunch"
 The UX is the same too, so when you sign up you'll see a new set of details in the SQL container:
 
 ```
-docker exec part2_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
+docker exec app_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
 ```
 
 ## Wrap Up
