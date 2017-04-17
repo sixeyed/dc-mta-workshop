@@ -1,4 +1,4 @@
-# Part 2 - Modernizing .NET Apps, for Ops
+# Part 3 - Modernizing .NET apps - the architecture
 
 In this section we have an existing app, already packaged as an MSI. We'll Dockerize a few versions of the app, seeing how to do service updates and the benefits of Dockerfiles over MSIs.
 
@@ -44,7 +44,7 @@ Now uncomment the code between the `v1.3` comments, lines 86-94, so that section
             //v1.3
 ```
 
-That replaces the synchronous SQL insert with message publishing. You can see the code for the message handler which subscribes to the message in [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.SaveProspect/Program.cs).
+That replaces the synchronous SQL insert with message publishing. You can see the code for the message handler which subscribes to the message in [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.SaveProspect/Program.cs). That will be packaged into a new image with this [Dockerfile](part-3/v1.3/save-handler/Dockerfile).
 
 You need to build a new version of the web image, and a new message handler image:
 
@@ -57,7 +57,7 @@ docker build -t $DockerID/mta-save-handler -f part-3\v1.3\save-handler\Dockerfil
 
 ```
 
-Then upgrade the application in the same way. This will replace the web app container and create new containers for the message queue and the handler:
+Then upgrade the application in the same way. This will replace the web app container and create new containers for the message queue and the handler. In the [v1.3 Docker Compose file](app/docker-compose-1.3.yml) you'll see we're using the [official image](https://hub.docker.com/_/nats/) for the [NATS](https://nats.io/) message queue:
 
 ```
 C:\scm\github\sixeyed\dc-mta-workshop\app
@@ -84,13 +84,13 @@ docker logs app_mta-save-handler_1
 
 Now when there are spikes in traffic, the message queue will smooth them out. The web app won't slow down waiting for SQL Server, and SQL Server doesn't need to scale up to deal with load.
 
-# 2 - Add self-service analytics
+## <a name="1"></a>Step 2 - Add self-service analytics
 
-The app performs better now, but all the data is stored in SQL Server which isn't very friendly for business users to get reports. Next we'll add self-service analytics, using enterprise-grade open-source software on Docker Hub.
+The app performs better now, but all the data is stored in SQL Server which isn't very friendly for business users to get reports. Next we'll add self-service analytics, using more enterprise-grade open-source software on Docker Hub.
 
-We'll be running Elasticsearch for storage and Kibana to provide an accessible front-end. To populate Elasticsearch with data when a user signs up, we just need to add another message handler, which will listen to the same messages published by the web app.
+We'll be running [Elasticsearch](https://www.elastic.co/products/elasticsearch) for storage and [Kibana](https://www.elastic.co/products/kibana) to provide an accessible front-end. To populate Elasticsearch with data when a user signs up, we just need to add another message handler, which will listen to the same messages published by the web app.
 
-The code for that is in another [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.IndexProspect/Program.cs). You'll build it in the same way:
+The code for that is in another [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.IndexProspect/Program.cs). You'll build it in the same way, using this [Dockerfile](part-3v/1.4/index-handler/Dockerfile):
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
@@ -99,10 +99,10 @@ docker build -t $DockerID/mta-index-handler -f part-3\v1.4\index-handler\Dockerf
 
 ```
 
-And now when you ugrade the application, none of the existing containers get replaced - their configuration hasn't changed. Only the new containers get created:
+And now when you ugrade the application to the [v1.4 Docker Compose file](app/docker-compose-1.4.yml), none of the existing containers get replaced - their configuration hasn't changed. Only the new containers get created:
 
 ```
-C:\scm\github\sixeyed\dc-mta-workshop\app
+cd :\scm\github\sixeyed\dc-mta-workshop\app
 
 docker-compose -f .\docker-compose-1.4.yml up -d
 ```
@@ -120,7 +120,7 @@ docker logs app_mta-index-handler_1
 You can add a few more users with different roles and countries, if you want to see the data nicely in Kibana. Kibana is also a web app running in a browser:
 
 ```
-$ip = docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' app_mta-app_1
+$ip = docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' app_kibana_1
 start "http://$ip:5601"
 ```
 
@@ -129,11 +129,11 @@ The Elasticsearch index is called `prospects`, and you can navigate around the d
 Kibana has a great feature set and it's easy to pick up for power users. They can do their own analytics or build dashboards for other users - no more IT requests to get reports out from SQL Server!
 
 
-# 3 - Replace homepage
+## <a name="1"></a>Step 3 - Replace homepage
 
 The last update we'll do is to replace the design of landing page, rendering it from a dedicated container. That allows for rapid iteration from the design team - the homepage can be replaced without regression testing the whole of the app.
 
-There's a new image to build for the homepage component, which is just a static HTML site:
+There's a new image to build for the homepage component, which is just a static HTML site built with this [Dockerfile](part-3/v1.5/homepage/Dockerfile):
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-3\v1.5\homepage
@@ -141,7 +141,7 @@ cd C:\scm\github\sixeyed\dc-mta-workshop\part-3\v1.5\homepage
 docker build -t $DockerID/mta-homepage .
 
 ```
-In the [v1.5 Docker Compose file]() there's a new environment variable for the web application. That's used as a feature switch - the app already has the code to fetch homepage content from a separate component, if this variable is set.
+In the [v1.5 Docker Compose file](app/docker-compose-1.5.yml) there's a new environment variable for the web application. That's used as a feature switch - the app already has the code to fetch homepage content from a separate component, if this variable is set.
 
 Upgrade the application with compose again:
 
@@ -164,4 +164,4 @@ Now you'll see the awesome new site design. You can still click through to the o
 
 That's all! Thanks for coming. We hope you had a good time and learned plenty about Docker on Windows. 
 
-> Have a great DockerCon!
+> Have a great #dockercon!
