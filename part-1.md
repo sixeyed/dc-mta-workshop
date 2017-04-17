@@ -156,7 +156,7 @@ sixeyed/mta-verify      latest              ff071bdc2128        17 minutes ago  
 
 Docker has built the image but it's only stored on the local machine. Next we'll push it to a public repository.
 
-## <a name="task2.2"></a>Task 2.2: Push your image to Docker Hub
+## <a name="2"></a>Task 2.2: Push your image to Docker Hub
 
 Distribution is built into the Docker platform. You can build images locally and push them to a [registry](https://docs.docker.com/registry/), making them available to other users. Anyone with access can pull that image and run a container from it. The behavior of the app in the container will be the same for everyone, because the image contains the fully-configured app - the only requirements to run it are Windows and Docker.
 
@@ -180,7 +180,7 @@ You'll see the upload progress for each layer in the Docker image. The IIS layer
 
 You can browse to *https://hub.docker.com/r/_my-docker-Id_/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
 
-## <a name="task2.3"></a>Task 2.3: Run your website in a container
+## <a name="3"></a>Task 2.3: Run your website in a container
 
 It's time to run your app and see what it does! 
 
