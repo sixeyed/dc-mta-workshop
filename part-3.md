@@ -95,7 +95,7 @@ The code for that is in another [Program.cs](src/ProductLaunch/ProductLaunch.Mes
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
 
-docker build -t $DockerID/mta-index-handler -f part-3\v1.4\index-handler\Dockerfile .
+docker build -t $Env:dockerId/mta-index-handler -f part-3\v1.4\index-handler\Dockerfile .
 
 ```
 
@@ -138,7 +138,7 @@ There's a new image to build for the homepage component, which is just a static 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-3\v1.5\homepage
 
-docker build -t $DockerID/mta-homepage .
+docker build -t $Env:dockerId/mta-homepage .
 
 ```
 In the [v1.5 Docker Compose file](app/docker-compose-1.5.yml) there's a new environment variable for the web application. That's used as a feature switch - the app already has the code to fetch homepage content from a separate component, if this variable is set.
