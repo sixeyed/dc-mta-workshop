@@ -119,7 +119,7 @@ Next you'll learn how to package your own Windows app as a Docker image, using a
 
 The Dockerfile syntax is simple. In this task you'll walk through a Dockerfile for a custom website, and see how to package and run it with Docker.
 
-Have a look at the [Dockerfile for the lab](tweet-app/Dockerfile), which builds a simple static website running on IIS. These are the main features:
+Have a look at the [Dockerfile for this app](part-1/tweet-app/Dockerfile), which builds a simple static website running on IIS. These are the main features:
 
 - it is based [FROM](https://docs.docker.com/engine/reference/builder/#from) `microsoft/windowsservercore`, so the image will start with a clean Windows Server 2016 deployment
 - it uses the [SHELL](https://docs.docker.com/engine/reference/builder/#shell) instruction to switch to PowerShell when building the Dockerfile, so the commands to run are all in PowerShell
@@ -138,7 +138,8 @@ To build the Dockerfile, change to the `tweet-app` directory and run the `build`
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-1\tweet-app
 docker image build --tag $Env:dockerId/mta-tweet-app .
 ```
-> Be sure to use your Docker ID in the image tag. You will share it on Docker Hub in the next step, and you can only do that if you use your ID. My Docker ID is `sixeyed`, so I run `docker build -t sixeyed/dockercon-tweet-app` 
+
+> Be sure to use your Docker ID in the image tag if you haven't saved it as an environment variable. You will share it on Docker Hub in the next step, and you can only do that if you use your ID. My Docker ID is `sixeyed`, so I run `docker build -t sixeyed/dockercon-tweet-app` 
 
 You'll see output on the screen as Docker runs each instruction in the Dockerfile.
 
@@ -177,7 +178,7 @@ docker push $Env:dockerId/mta-tweet-app
 
 You'll see the upload progress for each layer in the Docker image. The IIS layer is 260MB so that will take a few seconds. The whole image is over 10GB, but the bulk of that is in the Windows Server Core base image. Those layers are already stored in Docker Hub, so they don't get uploaded - only the new parts of the image get pushed.
 
-You can browse to *https://hub.docker.com/r/<my-docker-Id>/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
+You can browse to *https://hub.docker.com/r/_my-docker-Id_/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
 
 ## <a name="task2.3"></a>Task 2.3: Run your website in a container
 
@@ -201,6 +202,6 @@ You should see this:
 
 Go ahead and hit the button to Tweet about the workshop! No data gets stored in the container, so your credentials are safe. 
 
-## Wrap Up
+## Next Up
 
 That's it for Part 1. Next we'll get stuck into modernizing an old ASP.NET app, by bringing it to a modern application platform.
