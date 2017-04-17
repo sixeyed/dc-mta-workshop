@@ -20,7 +20,7 @@ You will build images and push them to Docker Hub during the workshop, so they a
 
 ## <a name="2"></a>Step 2. Get Docker
 
-We are using new features in Docker 17.05. For the workshp we will provide you with a VM running in Azure which is already configured with everything you need. 
+We are using new features in Docker 17.05. For the workshp we will provide you with a VM running in Azure which is already configured with everything you need.
 
 If you want to use your own laptop or a VM running Windows 10 or Windows Server 2016, you'll need to install Docker 17.05, and follow the rest of the steps in this page to get your environment set up.
 
@@ -30,7 +30,7 @@ You are welcome to use one of our hosted VMs on Microsoft's Azure cloud. This is
 
 > Your Azure VM will be destoyed after the workshop, so your work will be lost - but the images you push to Docker Hub will still be available.
 
-You do not need Docker running on your laptop for this option, but you will need a Remote Desktop client to connect to the VM. 
+You do not need Docker running on your laptop for this option, but you will need a Remote Desktop client to connect to the VM.
 
 - Windows - use the built-in Remote Desktop Connection app.
 - Mac - install [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the app store.
@@ -48,8 +48,17 @@ Install [Docker CE for Windows]() from Docker Store, making sure to choose the E
 
 Install [Docker EE for Windows Server]() from Docker Store. The installation deploys Docker as a Windows service and starts the service for you. Then you need to replace the EE version with 17.05 CE:
 
->TODO
+```
+Stop-Service docker
+$version = "17.05.0-ce-rc1"
 
+$wc = New-Object net.webclient
+$wc.DownloadFile("https://test.docker.com/builds/Windows/x86_64/docker-$version.zip", "$env:TEMP\docker.zip")
+Expand-Archive -Path "$env:TEMP\docker.zip" -DestinationPath $env:ProgramFiles -Force
+Remove-Item "$env:TEMP\docker.zip"
+
+Start-Service docker
+```
 
 ## <a name="3"></a>Step 3. Pull the Windows base images
 
