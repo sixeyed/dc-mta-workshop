@@ -22,7 +22,7 @@ namespace ProductLaunch.Web
             using (var context = new ProductLaunchContext())
             {
                 _Countries["-"] = context.Countries.Single(x => x.CountryCode == "-");
-;                foreach (var country in context.Countries.Where(x=>x.CountryCode != "-").OrderBy(x => x.CountryName))
+                foreach (var country in context.Countries.Where(x=>x.CountryCode != "-").OrderBy(x => x.CountryName))
                 {
                     _Countries[country.CountryCode] = country;
                 }
@@ -81,17 +81,17 @@ namespace ProductLaunch.Web
                 context.Prospects.Add(prospect);
                 context.SaveChanges();
             }
+            //v1.0
 
             //v1.3:
-            /*
-            var eventMessage = new ProspectSignedUpEvent
-            {
-                Prospect = prospect,
-                SignedUpAt = DateTime.UtcNow
-            };
+            //var eventMessage = new ProspectSignedUpEvent
+            //{
+            //    Prospect = prospect,
+            //    SignedUpAt = DateTime.UtcNow
+            //};
 
-            MessageQueue.Publish(eventMessage);
-            */
+            //MessageQueue.Publish(eventMessage);
+            //v1.3
 
             Server.Transfer("ThankYou.aspx");
         }

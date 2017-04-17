@@ -1,12 +1,5 @@
-
-[CmdletBinding()]
-Param(
-   [Parameter(Mandatory=$True,Position=1)]
-   [string] $dockerID
-)
-
 docker build `
- -t $dockerID/mta-verify `
+ -t $Env:dockerID/mta-verify `
  $pwd\verify;
 
-docker run --rm $dockerID/mta-verify;
+docker run --rm $Env:dockerID/mta-verify;

@@ -136,7 +136,7 @@ To build the Dockerfile, change to the `tweet-app` directory and run the `build`
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-1\tweet-app
-docker image build --tag $DockerID/mta-tweet-app .
+docker image build --tag $Env:dockerId/mta-tweet-app .
 ```
 > Be sure to use your Docker ID in the image tag. You will share it on Docker Hub in the next step, and you can only do that if you use your ID. My Docker ID is `sixeyed`, so I run `docker build -t sixeyed/dockercon-tweet-app` 
 
@@ -164,7 +164,7 @@ Distribution is built into the Docker platform. You can build images locally and
 ```
 > docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: $DockerID
+Username: <my-docker-Id>
 Password:
 Login Succeeded
 ```
@@ -172,12 +172,12 @@ Login Succeeded
 Now upload your image to the Hub:
 
 ```
-docker push $DockerID/mta-tweet-app
+docker push $Env:dockerId/mta-tweet-app
 ```
 
 You'll see the upload progress for each layer in the Docker image. The IIS layer is 260MB so that will take a few seconds. The whole image is over 10GB, but the bulk of that is in the Windows Server Core base image. Those layers are already stored in Docker Hub, so they don't get uploaded - only the new parts of the image get pushed.
 
-You can browse to *https://hub.docker.com/r/$DockerID/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
+You can browse to *https://hub.docker.com/r/<my-docker-Id>/mta-tweet-app/* and see your newly-pushed app image. This is a public repository, so anyone can pull the image - you don't even need a Docker ID to pull public images.
 
 ## <a name="task2.3"></a>Task 2.3: Run your website in a container
 
@@ -186,7 +186,7 @@ It's time to run your app and see what it does!
 This is a web application, so you'll run it in the background and publish the HTTP port so traffic from the host is redirected into the container:
 
 ```
-docker container run --detach --publish 80:80 --name app $DockerID/mta-tweet-app 
+docker container run --detach --publish 80:80 --name app $Env:dockerId/mta-tweet-app 
 ```
 
 If you're running on a VM, browse to the VM address from your laptop browser and you'll see the web app. If you're running locally, you need to browse to the container's IP address. Find it with:
@@ -203,4 +203,4 @@ Go ahead and hit the button to Tweet about the workshop! No data gets stored in 
 
 ## Wrap Up
 
-That's it for Part 1. Next we'll get stuck into modernizing ASP.NET apps.
+That's it for Part 1. Next we'll get stuck into modernizing an old ASP.NET app, by bringing it to a modern application platform.

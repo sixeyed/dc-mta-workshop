@@ -114,13 +114,19 @@ cd C:\scm\github\sixeyed
 git clone https://github.com/sixeyed/dc-mta-workshop
 ```
 
+> Now save your Docker ID to an environment variable, so it works with all the lab scripts:
+
+```
+$Env:dockerId='<my-docker-Id>'
+```
+
 ## <a name="6"></a>Step 6. Test your setup
 
 Open a PowerShell prompt **using Run as Administrator** and run the verification script:
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
-.\verify.ps1 $DockerID
+.\verify.ps1
 ```
 
 You should see a useful message, proving your Docker setup is working correctly.
