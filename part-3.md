@@ -51,9 +51,9 @@ You need to build a new version of the web image, and a new message handler imag
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
 
-docker build -t $DockerID/mta-app:1.3 -f part-3\v1.3\web\Dockerfile .
+docker build -t $Env:dockerId/mta-app:1.3 -f part-3\v1.3\web\Dockerfile .
 
-docker build -t $DockerID/mta-save-handler -f part-3\v1.3\save-handler\Dockerfile .
+docker build -t $Env:dockerId/mta-save-handler -f part-3\v1.3\save-handler\Dockerfile .
 
 ```
 
