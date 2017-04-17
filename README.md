@@ -17,5 +17,5 @@ Then we'll follow along with these.
 > It doesn't matter if you're from a dev or an ops background, you'll learn how the Docker platform benefits all aspects of IT.
 
 - [Part 1](part-1.md) - running Docker on Windows
-- [Part 2](part-2.md) - modernizing .NET apps, for Ops
-- [Part 3](part-3.md) - modernizing .NET apps, for Devs
+- [Part 2](part-2.md) - modernizing the application platform
+- [Part 3](part-3.md) - modernizing the application architecture

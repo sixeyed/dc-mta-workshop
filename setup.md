@@ -26,7 +26,7 @@ If you want to use your own laptop or a VM running Windows 10 or Windows Server 
 
 ### Azure VM
 
-You are welcome to use one of our hosted VMs on Microsoft's Azure cloud. This is a Windows Server 2016 VM with Docker EE already installed. Sign up at the [registration page]() and you will be emailed a link with connection details.
+You are welcome to use one of our hosted VMs on Microsoft's Azure cloud. This is a Windows Server 2016 VM with Docker EE already installed. You will have be provided with the VM credentials at the workshop.
 
 > Your Azure VM will be destoyed after the workshop, so your work will be lost - but the images you push to Docker Hub will still be available.
 
@@ -38,15 +38,13 @@ You do not need Docker running on your laptop for this option, but you will need
 
 Once you've connected to your Azure VM, skip to [Step 5](#5).
 
-### OR - Windows 10
+### OPTIONAL - Windows 10
 
-Install [Docker CE for Windows]() from Docker Store, making sure to choose the Edge build to get the latest version. Run Docker for Windows and from the taskbar switch to Windows containers:
+Install [Docker CE for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows?tab=description) from Docker Store, making sure to choose the Edge build to get the latest version. Run Docker for Windows and from the taskbar switch to Windows containers.
 
-![img]()
+### OPTIONAL - Windows Server 2016
 
-### OR - Windows Server 2016
-
-Install [Docker EE for Windows Server]() from Docker Store. The installation deploys Docker as a Windows service and starts the service for you. Then you need to replace the EE version with 17.05 CE:
+Install [Docker EE for Windows Server](https://store.docker.com/editions/enterprise/docker-ee-server-windows?tab=description) from Docker Store. The installation deploys Docker as a Windows service and starts the service for you. Then you need to replace the EE version with 17.05 CE:
 
 ```
 Stop-Service docker
@@ -63,6 +61,8 @@ Start-Service docker
 ## <a name="3"></a>Step 3. Pull the Windows base images
 
 We will use Docker images based on Windows Server Core and Nano Server, so be sure you have these image versions available.
+
+> If you're using one of the lab VMs, these images are already pulled.
 
 ```
 docker pull microsoft/nanoserver:10.0.14393.693
@@ -87,19 +87,20 @@ docker pull sixeyed/msbuild:4.5.2-webdeploy
 
 Also you'll need some tools - Git to pull the workshop repo, and a text editor. Visual Studio isn't required for this workshop.
 
-The PowerShell Git module and Visual Studio code are nice options. You can install them with [Chocolatey]():
-
-```
-choco install poshgit
-choco install vscode
-```
-
 > If you're using one of the lab VMs, these tools are already installed.
 
+The PowerShell Git module and Visual Studio code are nice options. You can install them with [Chocolatey](https://chocolatey.org/):
+
+```
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install -y poshgit
+choco install -y visualstudiocode
+choco install -y firefox
+```
 
 ## <a name="5"></a>Step 5. Get the source
 
-Source code for the workshop is on a public GitHub repo. The lab VM has the repo set up, so just pull to make sure the latest changes are downloaded:
+Source code for the workshop is on a public GitHub repo. The lab VM has the repo set up, so just pull to make sure the latest changes are downloaded - use the PowerShell link from `C:\shortcuts`:
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
@@ -122,7 +123,7 @@ $Env:dockerId='<my-docker-Id>'
 
 ## <a name="6"></a>Step 6. Test your setup
 
-Open a PowerShell prompt **using Run as Administrator** and run the verification script:
+Open a PowerShell prompt **using Run as Administrator** (or from `C:\shortcuts` on the lab VM, and run the verification script:
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
