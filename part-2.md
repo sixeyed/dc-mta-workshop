@@ -45,7 +45,7 @@ Version 1.0 has a pretty basic UI. Next you'll upgrade to a fancier version.
 
 ## <a name="2"></a>Step 2. Update the ASP.NET site with a new image version
 
-For the new app version there's a new MSI. The [Dockerfile](part-2/v1.1/Dockerfile) is exactly the same as v1.0, just using a different MSI. This scenario is where you have a new application release but you want to keep the same wunderlying Windows version.
+For the new app version there's a new MSI. The [Dockerfile](part-2/v1.1/Dockerfile) is exactly the same as v1.0, just using a different MSI. This scenario is where you have a new application release but you want to keep the same underlying Windows version.
 
 Build the new app version:
 
@@ -77,7 +77,7 @@ Sign up with another set of details, and when you repeat the SQL query you'll se
 docker exec app_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
 ```
 
-The app is looking better, but the Dockerfile isn't very useful. It should describe everything that's needed to package the app, but most of the work is done in the opaque MSI file - built from this hug [Wix script](src/ProductLaunch/ProductLaunch.Web.Setup/Product.wxs).
+The app is looking better, but the Dockerfile isn't very useful. It should describe everything that's needed to package the app, but most of the work is done in the opaque MSI file - built from this huge [Wix script](src/ProductLaunch/ProductLaunch.Web.Setup/Product.wxs).
 
 Next you'll see how to package the same content in a different way, and upgrade the app container to a new version of Windows at the same time.
 
