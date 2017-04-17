@@ -90,7 +90,7 @@ The app performs better now, but all the data is stored in SQL Server which isn'
 
 We'll be running [Elasticsearch](https://www.elastic.co/products/elasticsearch) for storage and [Kibana](https://www.elastic.co/products/kibana) to provide an accessible front-end. To populate Elasticsearch with data when a user signs up, we just need to add another message handler, which will listen to the same messages published by the web app.
 
-The code for that is in another [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.IndexProspect/Program.cs). You'll build it in the same way, using this [Dockerfile](part-3v/1.4/index-handler/Dockerfile):
+The code for that is in another [Program.cs](src/ProductLaunch/ProductLaunch.MessageHandlers.IndexProspect/Program.cs). You'll build it in the same way, using this [Dockerfile](part-3/v1.4/index-handler/Dockerfile):
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop
