@@ -1,4 +1,4 @@
-# Part 2 - Modernizing .NET Apps, for Ops
+# Part 2 - Modernizing .NET apps - the platform
 
 In this section we have an existing app, already packaged as an MSI. We'll Dockerize a few versions of the app, seeing how to do service updates and the benefits of Dockerfiles over MSIs.
 
@@ -21,10 +21,10 @@ cd C:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.0
 docker image build --tag $Env:dockerID/mta-app:1.0 .
 ```
 
-The app uses SQL Server, but rather than start individual containers, you'll use [Docker Compose]() to organize the solution.
+The app uses SQL Server, but rather than start individual containers, you'll use [Docker Compose](https://docs.docker.com/compose/) to organize all the parts of the solution.
 
 ```
-cd ..\..\app
+cd C:\scm\github\sixeyed\dc-mta-workshop\app
 docker-compose -f docker-compose-1.0.yml up -d
 ```
 
@@ -58,7 +58,7 @@ docker image build --tag $Env:dockerId/mta-app:1.1 .
 And use Docker Compose to upgrade the solution:
 
 ```
-cd ..
+cd C:\scm\github\sixeyed\dc-mta-workshop\app
 docker-compose -f docker-compose-1.1.yml up -d
 ```
 
@@ -92,7 +92,7 @@ It's also clear from the Dockerfile exactly how the app is built and installed, 
 Multi-stage builds run in the same way, but only the final image is tagged:
 
 ```
-C:\scm\github\sixeyed\dc-mta-workshop
+cd C:\scm\github\sixeyed\dc-mta-workshop
 
 docker build -t $Env:dockerId/mta-app:1.2 -f part-2\v1.2\Dockerfile .
 ```
@@ -125,4 +125,4 @@ docker exec part2_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prosp
 
 ## Wrap Up
 
-That's it for Part 2. In the last part we'll modernize the app architecture, making use of the Docker platform to break features out of the monolith and run them in lightweight containers.
+That's it for Part 2. In [Part 3](part-3.md) we'll modernize the app architecture, making use of the Docker platform to break features out of the monolith, and run them in lightweight containers.

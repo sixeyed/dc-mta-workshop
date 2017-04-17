@@ -134,4 +134,4 @@ You should see a useful message, proving your Docker setup is working correctly.
 
 # Next Up
 
-On to [Part 1](part-1.md).
+On to [Part 1](part-1.md)!

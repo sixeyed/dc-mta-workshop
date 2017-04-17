@@ -204,4 +204,4 @@ Go ahead and hit the button to Tweet about the workshop! No data gets stored in 
 
 ## Next Up
 
-That's it for Part 1. Next we'll get stuck into modernizing an old ASP.NET app, by bringing it to a modern application platform.
+That's it for Part 1. Next in [Part 2](part-2.md).we'll get stuck into modernizing an old ASP.NET app, by bringing it to a modern application platform.
