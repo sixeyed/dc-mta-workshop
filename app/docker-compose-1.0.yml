@@ -11,7 +11,7 @@ services:
       - app-net
 
   mta-app:
-    image: sixeyed/mta-app:1.0
+    image: ${dockerid}/mta-app:1.0
     ports:
       - "80:80"
     environment:

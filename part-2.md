@@ -16,22 +16,37 @@ Version 1.0 of our demo app is ready to go - check out the [Dockerfile](part-2/v
 
 Packaging the app with Docker is the same `build` command - you'll use an image tag to identify the version:
 
+Set an environment variable with your Docker ID:
+
+```
+$env:dockerid = "<docker-id>"
+```
+
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.0
-docker image build --tag $DockerID/mta-app:1.0 .
+docker image build --tag $Env:dockerID/mta-app:1.0 .
 ```
 
 The app uses SQL Server, but rather than start individual containers, you'll use [Docker Compose]() to organize the solution.
 
 ```
-cd ..
+cd ..\..\app
 docker-compose -f docker-compose-1.0.yml up -d
 ```
 
 And register your details - that will write a row to SQL Server. The SQL Server container is only available to other Docker containers because no ports are published. You can execute PowerShell in the container to see your data:
 
 ```
-docker exec part2_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
+docker exec app_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
+```
+
+To access the website, figure out the container IP and open a browser:
+
+```
+docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' app_mta-app_1
+172.24.121.114
+
+start http://172.24.121.114/productLaunch/
 ```
 
 Version 1.0 has a pretty basic UI. Next you'll upgrade to a fancier version.
@@ -39,7 +54,6 @@ Version 1.0 has a pretty basic UI. Next you'll upgrade to a fancier version.
 ## <a name="2"></a>Step 2. Update the ASP.NET site with a new image version
 
 For the new app version there's a new MSI. The [Dockerfile](part-2/v1.1/Dockerfile) is exatly the same as v1.0, just using a different MSI. This scenario is where you have a new application 
-
 
 ```
 cd C:\scm\github\sixeyed\dc-mta-workshop\part-2\v1.1
