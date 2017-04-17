@@ -37,10 +37,10 @@ docker-compose -f docker-compose-1.0.yml up -d
 And register your details - that will write a row to SQL Server. The SQL Server container is only available to other Docker containers because no ports are published. You can execute PowerShell in the container to see your data:
 
 ```
-docker exec part2_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
+docker exec app_mta-db_1 powershell "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database ProductLaunch"
 ```
 
-To access the website, figure out the container IP and open browser:
+To access the website, figure out the container IP and open a browser:
 
 ```
 docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' app_mta-app_1
