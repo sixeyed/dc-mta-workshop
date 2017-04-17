@@ -84,7 +84,7 @@ docker logs app_mta-save-handler_1
 
 Now when there are spikes in traffic, the message queue will smooth them out. The web app won't slow down waiting for SQL Server, and SQL Server doesn't need to scale up to deal with load.
 
-## <a name="1"></a>Step 2 - Add self-service analytics
+## <a name="2"></a>Step 2 - Add self-service analytics
 
 The app performs better now, but all the data is stored in SQL Server which isn't very friendly for business users to get reports. Next we'll add self-service analytics, using more enterprise-grade open-source software on Docker Hub.
 
@@ -129,7 +129,7 @@ The Elasticsearch index is called `prospects`, and you can navigate around the d
 Kibana has a great feature set and it's easy to pick up for power users. They can do their own analytics or build dashboards for other users - no more IT requests to get reports out from SQL Server!
 
 
-## <a name="1"></a>Step 3 - Replace homepage
+## <a name="3"></a>Step 3 - Replace homepage
 
 The last update we'll do is to replace the design of landing page, rendering it from a dedicated container. That allows for rapid iteration from the design team - the homepage can be replaced without regression testing the whole of the app.
 
