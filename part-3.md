@@ -60,7 +60,7 @@ docker build -t $Env:dockerId/mta-save-handler -f part-3\v1.3\save-handler\Docke
 Then upgrade the application in the same way. This will replace the web app container and create new containers for the message queue and the handler. In the [v1.3 Docker Compose file](app/docker-compose-1.3.yml) you'll see we're using the [official image](https://hub.docker.com/_/nats/) for the [NATS](https://nats.io/) message queue:
 
 ```
-C:\scm\github\sixeyed\dc-mta-workshop\app
+cd C:\scm\github\sixeyed\dc-mta-workshop\app
 
 docker-compose -f .\docker-compose-1.3.yml up -d
 ```
