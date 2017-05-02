@@ -18,6 +18,12 @@ Remove-Item "$env:TEMP\docker.zip"
 
 Start-Service docker
 
+# Docker compose
+
+$composeVersion = "1.12.0"
+$wc = New-Object net.webclient
+$wc.DownloadFile("https://github.com/docker/compose/releases/download/$composeVersion/docker-compose-Windows-x86_64.exe", "$env:ProgramFiles\Docker\docker-compose.exe")
+
 # update base images
 
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/sixeyed/devtest-lab-ddc/master/scripts/windows/pull-base-images.ps1'))
